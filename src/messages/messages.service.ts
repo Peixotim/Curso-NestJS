@@ -25,4 +25,15 @@ export class MessagesService {
   public findOne(id: number): EntityMessage | undefined {
     return this.messages.find((search) => search.id === id);
   }
+
+  public remove(name: string): boolean {
+    for (let i = 0; i < this.messages.length; i++) {
+      const messageE: EntityMessage = this.messages[i];
+      if (messageE.name == name) {
+        this.messages.splice(i, 1);
+        return true;
+      }
+    }
+    return false;
+  }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { EntityMessage } from './messages.entity';
 @Controller('message')
@@ -31,7 +31,12 @@ export class MessagesController {
   }
 
   @Get(':id')
-  public findByOne(@Param() id: number): EntityMessage | undefined {
-    return this.messagesService.findOne(id);
+  public findByOne(@Param() id: string): EntityMessage | undefined {
+    return this.messagesService.findOne(Number(id));
+  }
+
+  @Delete(':name')
+  public delete(@Param('name') name: string): boolean {
+    return this.messagesService.remove(name);
   }
 }
