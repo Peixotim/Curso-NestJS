@@ -3,7 +3,7 @@ import { ConceitosManualService } from './conceitos-manual.service';
 import { ConceitosManualController } from './conceitos-manual.controller';
 
 @Module({
+  controllers: [ConceitosManualController],
   providers: [ConceitosManualService],
-  controllers: [ConceitosManualController]
 })
 export class ConceitosManualModule {}
