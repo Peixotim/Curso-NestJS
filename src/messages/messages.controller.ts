@@ -1,7 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { EntityMessage } from './messages.entity';
-@Controller('recados')
+@Controller('message')
 export class MessagesController {
   constructor(readonly messagesService: MessagesService) {}
 
@@ -10,8 +10,28 @@ export class MessagesController {
     return this.messagesService.findAll();
   }
 
-  @Get('/:id')
-  public findByOne(id: number): EntityMessage | undefined {
+  @Post()
+  public create(
+    @Body()
+    body: {
+      id: number;
+      name: string;
+      description: string;
+      to: string;
+      of: string;
+    },
+  ): EntityMessage {
+    return this.messagesService.create(
+      body.id,
+      body.name,
+      body.description,
+      body.to,
+      body.of,
+    );
+  }
+
+  @Get(':id')
+  public findByOne(@Param() id: number): EntityMessage | undefined {
     return this.messagesService.findOne(id);
   }
 }

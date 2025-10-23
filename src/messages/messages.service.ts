@@ -12,9 +12,10 @@ export class MessagesService {
     to: string,
     of: string,
   ): EntityMessage {
-    const newRecado = new EntityMessage(id, name, description, to, of);
-    this.messages.push(newRecado);
-    return newRecado;
+    const newMessage = new EntityMessage(id, name, description, to, of);
+    this.messages.push(newMessage);
+
+    return newMessage;
   }
 
   public findAll(): EntityMessage[] {
@@ -22,6 +23,6 @@ export class MessagesService {
   }
 
   public findOne(id: number): EntityMessage | undefined {
-    return this.messages.find((find) => find.id == id);
+    return this.messages.find((search) => search.id === id);
   }
 }
