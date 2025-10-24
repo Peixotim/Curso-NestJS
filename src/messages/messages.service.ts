@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { EntityMessage } from './messages.entity';
 
 @Injectable()
@@ -35,5 +35,17 @@ export class MessagesService {
       }
     }
     return false;
+  }
+
+  public modifyName(id: number, name: string): boolean {
+    for (let i = 0; i < this.messages.length; i++) {
+      const messageCurrent: EntityMessage = this.messages[i];
+
+      if (messageCurrent.id === id) {
+        messageCurrent.name = name;
+        return true;
+      }
+    }
+    throw new NotFoundException('Error, no message found !');
   }
 }
