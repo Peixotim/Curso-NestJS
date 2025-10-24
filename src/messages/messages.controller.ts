@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { EntityMessage } from './messages.entity';
 @Controller('message')
@@ -10,6 +19,7 @@ export class MessagesController {
     return this.messagesService.findAll();
   }
 
+  @HttpCode(HttpStatus.CREATED)
   @Post()
   public create(
     @Body()
@@ -31,12 +41,14 @@ export class MessagesController {
     );
   }
 
+  @HttpCode(HttpStatus.OK)
   @Get(':id')
   public findByOne(@Param() id: string): EntityMessage | undefined {
     const getId: number = Number(id);
     return this.messagesService.findOne(getId);
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':name')
   public delete(@Param('name') name: string): boolean {
     return this.messagesService.remove(name);
