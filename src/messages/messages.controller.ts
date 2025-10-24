@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { MessagesService } from './messages.service';
@@ -52,5 +53,16 @@ export class MessagesController {
   @Delete(':name')
   public delete(@Param('name') name: string): boolean {
     return this.messagesService.remove(name);
+  }
+
+  @Patch(':id')
+  public modifyName(
+    @Param('id') id: number,
+    @Body()
+    body: {
+      name: string;
+    },
+  ): boolean {
+    return this.messagesService.modifyName(id, body.name);
   }
 }
