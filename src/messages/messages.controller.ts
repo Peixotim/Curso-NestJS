@@ -21,6 +21,7 @@ export class MessagesController {
       of: string;
     },
   ): EntityMessage {
+    console.log(body);
     return this.messagesService.create(
       body.id,
       body.name,
@@ -32,7 +33,8 @@ export class MessagesController {
 
   @Get(':id')
   public findByOne(@Param() id: string): EntityMessage | undefined {
-    return this.messagesService.findOne(Number(id));
+    const getId: number = Number(id);
+    return this.messagesService.findOne(getId);
   }
 
   @Delete(':name')
