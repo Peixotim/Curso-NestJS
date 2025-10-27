@@ -3,7 +3,9 @@ import { EntityMessage } from './messages.entity';
 
 @Injectable()
 export class MessagesService {
-  private messages: EntityMessage[] = [];
+  private messages: EntityMessage[] = [
+    { id: 1, name: 'Message', description: 'Hello', to: 'To', of: 'a' },
+  ];
 
   public create(
     id: number,
